@@ -180,6 +180,8 @@ export class NgbTypeahead implements ControlValueAccessor,
    */
   @Output() selectItem = new EventEmitter<NgbTypeaheadSelectItemEvent>();
 
+  @Output() openPopup = new EventEmitter<void>();
+
   activeDescendant: string;
   popupId = `ngb-typeahead-${nextWindowId++}`;
 
@@ -317,6 +319,8 @@ export class NgbTypeahead implements ControlValueAccessor,
       if (this.container === 'body') {
         window.document.querySelector(this.container).appendChild(this._windowRef.location.nativeElement);
       }
+
+      this.openPopup.emit();
 
       this._changeDetector.markForCheck();
 
